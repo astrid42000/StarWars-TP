@@ -1,0 +1,14 @@
+
+@font-face {
+  font-family:"starwars";
+  src: url("../../../assets/police/Starjout.ttf")
+}
+
+.titre{
+  font-family:"starwars", Serif;
+}
+
+ a{
+  font-family: "titre",Serif;
+}
+

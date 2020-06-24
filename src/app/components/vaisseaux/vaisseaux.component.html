@@ -1,0 +1,28 @@
+<h2>mes vaisseaux</h2>
+
+<table class="table table-bordered table-dark w-75 mx-auto my-auto ">
+  <thead>
+  <th>Identifiant</th>
+  <th>Nom</th>
+  <th>Modele</th>
+  <th>Vitesse Lumiere</th>
+  <th>Nombre de passagers max</th>
+  <th>Détails</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let vaisseau of this.myVaisseaux">
+    <td>{{vaisseau.id}}</td>
+    <td>{{vaisseau.nom | uppercase}}</td>
+    <td>{{vaisseau.modele}}</td>
+    <td>{{vaisseau.lightSpeed?'oui':'non'}}</td>
+    <td>{{vaisseau.nbrPassagers}}</td>
+    <td><a [routerLink]="['/detailVaisseau',vaisseau.id]">Voir détails</a>
+    <button (click)="supprime(vaisseau)">Supprimer le vaisseau</button>
+    <a [routerLink]="['/editVaisseau/update/', vaisseau.id]">mettre à jour le vaisseau</a></td>
+  </tr>
+  </tbody>
+</table>
+
+
+  <button class="button"><a routerLink="/addVaisseau/add">Ajouter un vaisseau</a></button>
+

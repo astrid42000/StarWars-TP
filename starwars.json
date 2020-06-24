@@ -1,0 +1,30 @@
+{
+  "planete": [
+    {
+      "id": 1,
+      "nom": "tatooine",
+      "nbre d'habitants'": 10,
+      "allegeance": "resistance",
+      "nbr km de la terre": 30000000,
+      "image": "f"
+    }
+  ],
+  "vaisseau": [
+    {
+      "id": 1,
+      "nom": "faucon millenium",
+      "modele": "XXXXXXXXXX",
+      "lightspeed": true,
+      "nbr passagers": 10,
+      "img": "test"
+    },
+    {
+      "nom": "x-wing",
+      "modele": "YYYY",
+      "lightspeed": false,
+      "nbr passagers": 2,
+      "img": "image.jpg",
+      "id": 2
+    }
+  ]
+}

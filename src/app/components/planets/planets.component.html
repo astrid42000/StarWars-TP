@@ -1,0 +1,33 @@
+<h2>mes planetes</h2>
+
+
+<table class="table table-bordered table-dark w-75 mx-auto my-auto ">
+  <thead>
+  <th>Identifiant</th>
+  <th>Nom</th>
+  <th>Nombres d'habitants</th>
+  <th>Allégeance</th>
+  <th>Eloignement de la Terre</th>
+  <th>Details</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let planete of this.myPlanetes">
+  <td>{{planete.id}}</td>
+  <td>{{planete.nom | uppercase}}</td>
+  <td>{{planete.nbrHabitant}}</td>
+  <td>{{planete.allegeance}}</td>
+  <td>{{planete.nbrKmTerre}}</td>
+    <td> <a [routerLink]="['/detail',planete.id]">Voir détails</a><br>
+      <a [routerLink]="['/edit/update', planete.id]">mettre à jour</a><br>
+      <button (click)="deletePlanete(planete)">supprimer une planète</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+  <button class="button"><a routerLink="/addPlanet/add">Ajouter une planète</a></button>
+
+
+
+<div class="json">{{myPlanetes | json}}</div>
