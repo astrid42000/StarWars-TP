@@ -10,16 +10,19 @@ import {VaisseauService} from "../../services/vaisseau.service";
 })
 export class UpdateVaisseauComponent implements OnInit {
   vaisseauUpdate: Vaisseau;
-  constructor(private activatedRoute: ActivatedRoute,private vaisseauService: VaisseauService, private router: Router) { }
+  isLoading:boolean;
+  constructor(private Route: ActivatedRoute,private vaisseauService: VaisseauService, private router: Router) { }
 
 
   ngOnInit(): void {
-    let id = +this.activatedRoute.snapshot.paramMap.get('id');
-    console.log (id);
-    this.vaisseauUpdate= this.vaisseauService.retourneUn(id);
+    this.isLoading=true;
+    this.vaisseauService.retourneUn(+this.Route.snapshot.paramMap.get('id')).subscribe((data:Vaisseau)=>{
+      this.vaisseauUpdate=data,this.isLoading=false;
+    });
   }
 update(){
-    this.vaisseauService.edition(this.vaisseauUpdate);
-    this.router.navigate(['vaisseaux']);
+    this.isLoading=true;
+    this.vaisseauService.edition(this.vaisseauUpdate).subscribe(then=>(this.isLoading=false,this.router.navigate(['vaisseaux'])))
+
 }
 }

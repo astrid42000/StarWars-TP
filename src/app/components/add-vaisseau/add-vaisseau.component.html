@@ -6,11 +6,6 @@
   <h2>Ajout d'un vaisseau</h2>
 
 <form  #vaisseauForm="ngForm" (ngSubmit)="voir()">
-  <div class="form-group">
-  <label for="id">id du vaisseau</label>
-    <input type="text" id="id" name="id" class="form-control" required [(ngModel)]="newVaisseau.id" #id='ngModel'></div>
-<div class="attention" [hidden]="id.valid">Entrer un id</div>
-
 
   <div class="form-group">
   <label for="name">Nom du vaisseau</label>

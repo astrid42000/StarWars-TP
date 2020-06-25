@@ -1,37 +1,61 @@
 import { Injectable } from '@angular/core';
 import {Planete} from "../models/planete";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {throwError, Observable} from "rxjs";
+import {catchError, retry} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaneteService {
-planets=[
-  new Planete(1, 'Tatooine', 1000, 'resistance', 200000000, 'Tatooine.jpg'),
-  new Planete(2,'Coruscant',300000,'empire',4509879000, 'coruscant.jpg'),
-  new Planete(3,'Kashyyyk', 40000,'resistance', 39000000000,'kasy.jpg')
-];
-  constructor() { }
+  ApiUrl="http://localhost:3000/planete";
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })};
 
-  retournePlanetes(): Planete[]{
-    return this.planets;
+
+  constructor(private http: HttpClient) {}
+
+  retournePlanetes():Observable<Planete[]>{
+    return this.http.get<Planete[]>(this.ApiUrl)
+      .pipe(
+         retry(1),
+        catchError(this.handleError)
+    );
   }
 
-  retourneUne(id:number): Planete{
-    return this.planets.filter(fn=>fn.id==id)[0];
+  retourneUne(id:number): Observable<Planete>{
+    return this.http.get<Planete>(this.ApiUrl+'/'+id)
+      .pipe(
+        retry(1),catchError(this.handleError)
+      );
   }
 
-  ajoutPlanete(newPlanete: Planete):void{
-    this.planets.push(newPlanete);
+  ajoutPlanete(newPlanete: Planete):Observable<Planete>{
+    return this.http.post<Planete>(this.ApiUrl, newPlanete, this.httpOptions).pipe(catchError(this.handleError))
   }
 
-  supprimer(planete:Planete):Planete[]{
-    this.planets= this.planets.filter(suppPlanete=>planete!==suppPlanete)
-    return this.planets;
+  supprimer(id:number):Observable<Planete>{
+    return this.http.delete<Planete>(this.ApiUrl+'/'+id,this.httpOptions).pipe(retry(1),catchError(this.handleError))
+  };
+
+  edition(planete:Planete) {
+    return this.http.put<Planete>(this.ApiUrl+'/'+planete.id,planete,this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  edition(planete:Planete){
-    this.planets.filter(planet=>planete!==planet)[0]=planete;
-    return this.planets;
 
-  }
+    handleError(error) {
+      let errorMessage = '';
+      if ( error.error instanceof ErrorEvent ) {
+        // Get client-side error
+        errorMessage = error.error.message;
+      } else {
+        // Get server-side error
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      }
+      window.alert(errorMessage);
+      return throwError(errorMessage);
+    }
+
 }

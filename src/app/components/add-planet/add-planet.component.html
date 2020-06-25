@@ -3,11 +3,6 @@
   <h2>Ajout d'une planète</h2>
 
   <form  #planeteForm="ngForm" (ngSubmit)="voir()">
-    <div class="form-group">
-      <label for="id">id de la planete</label>
-      <input type="text" id="id" name="id" class="form-control" required [(ngModel)]="newPlanete.id" #id='ngModel'></div>
-    <div class="attention" [hidden]="id.valid">Entrer un id</div>
-
 
     <div class="form-group">
       <label for="name">Nom de la planete</label>

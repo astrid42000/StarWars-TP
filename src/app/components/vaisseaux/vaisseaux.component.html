@@ -17,7 +17,7 @@
     <td>{{vaisseau.lightSpeed?'oui':'non'}}</td>
     <td>{{vaisseau.nbrPassagers}}</td>
     <td><a [routerLink]="['/detailVaisseau',vaisseau.id]">Voir détails</a>
-    <button (click)="supprime(vaisseau)">Supprimer le vaisseau</button>
+    <button (click)="supprime(vaisseau.id)">Supprimer le vaisseau</button>
     <a [routerLink]="['/editVaisseau/update/', vaisseau.id]">mettre à jour le vaisseau</a></td>
   </tr>
   </tbody>

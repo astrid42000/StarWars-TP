@@ -1,4 +1,4 @@
-<div class="formulaire">
+<div *ngIf="!isLoading" class="formulaire">
 
   <h2>Ajout d'une planète</h2>
 
@@ -32,3 +32,4 @@
   </form>
 </div>
 
+<div *ngIf="isLoading">chargement en cours....</div>

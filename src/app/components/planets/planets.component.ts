@@ -10,13 +10,20 @@ import {PlaneteService} from "../../services/planete.service";
 })
 export class PlanetsComponent implements OnInit {
 myPlanetes: Planete[];
+isLoading:boolean;
   constructor(private planeteService: PlaneteService) { }
 
   ngOnInit(): void {
-    this.myPlanetes= this.planeteService.retournePlanetes() ;
+    this.planeteService.retournePlanetes().subscribe((data:Planete[])=>{this.myPlanetes=data;});
   }
- deletePlanete(planete:Planete){
-this.myPlanetes=this.planeteService.supprimer(planete);
+ deletePlanete(id:number):void{
+this.isLoading=true;
+this.planeteService.supprimer(id).subscribe(then=>{
+                                                    this.planeteService.retournePlanetes().subscribe( (newdata:Planete[])=>{
+                                                                                              this.myPlanetes=newdata;
+                                                                                              this.isLoading=false;
+                                                    })
+})
  }
 
 

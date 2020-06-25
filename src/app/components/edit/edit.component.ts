@@ -10,17 +10,18 @@ import {PlaneteService} from "../../services/planete.service";
 })
 export class EditComponent implements OnInit {
 modifplanete: Planete;
+isLoading:boolean;
 
   constructor(private route: ActivatedRoute, private planeteService: PlaneteService, private router:Router) { }
 
   ngOnInit(): void{
- let id=+this.route.snapshot.paramMap.get('id');
-this.modifplanete= this.planeteService.retourneUne(id)
+ this.planeteService.retourneUne(+ this.route.snapshot.paramMap.get('id')).subscribe((data: Planete)=>{this.modifplanete=data});
   }
 
   update() {
-    this.planeteService.edition(this.modifplanete);
-    this.router.navigate(['/planets']);
+    this.isLoading=true;
+    this.planeteService.edition(this.modifplanete).subscribe(then=>{this.isLoading=false,this.router.navigate(['/planets'])}
+    );
 
   }
 }

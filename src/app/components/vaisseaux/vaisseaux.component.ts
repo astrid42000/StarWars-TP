@@ -9,12 +9,20 @@ import {VaisseauService} from "../../services/vaisseau.service";
 })
 export class VaisseauxComponent implements OnInit {
 myVaisseaux:Vaisseau[];
+isLoading:boolean
   constructor(private vaisseauService: VaisseauService) { }
 
   ngOnInit(): void {
-    this.myVaisseaux=this.vaisseauService.retourneVaisseaux();
+    this.vaisseauService.retourneVaisseaux().subscribe((data:Vaisseau[])=>{this.myVaisseaux=data;});
   }
-  supprime(vaisseau:Vaisseau) {
-    this.myVaisseaux= this.vaisseauService.delete(vaisseau);
-  }
-}
+  supprime(id:number):void{
+    this.isLoading=true;
+    this.vaisseauService.delete(id).subscribe(then=> {
+      this.vaisseauService.retourneVaisseaux().subscribe(
+        (newdata: Vaisseau[]) => {
+          this.myVaisseaux = newdata, this.isLoading = false;
+        });
+    })
+}}
+
+

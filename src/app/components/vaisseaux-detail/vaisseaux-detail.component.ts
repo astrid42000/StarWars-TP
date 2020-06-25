@@ -11,11 +11,14 @@ import {VaisseauService} from "../../services/vaisseau.service";
 export class VaisseauxDetailComponent implements OnInit {
 id:number;
 vaisseau: Vaisseau;
+isLoading:boolean;
   constructor(private route:ActivatedRoute, private vaisseauService:VaisseauService) { }
 
   ngOnInit(): void {
-    this.id = +(this.route.snapshot.paramMap.get('id'));
-    this.vaisseau= this.vaisseauService.retourneUn(this.id);
+this.isLoading=true;
+this.vaisseauService.retourneUn(+this.route.snapshot.paramMap.get('id')).subscribe((data:Vaisseau)=>{
+  this.vaisseau=data; this.isLoading=false;
+})
   }
 
 }

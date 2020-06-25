@@ -1,12 +1,21 @@
 {
-  "planete": [
+  "Planete": [
     {
       "id": 1,
       "nom": "tatooine",
-      "nbre d'habitants'": 10,
+      "nbrHabitant'": 10,
       "allegeance": "resistance",
-      "nbr km de la terre": 30000000,
-      "image": "f"
+      "nbrKmTerre": 30000000,
+      "img": "f",
+      "nbrHabitant": "2345"
+    },
+    {
+      "id": 2,
+      "nom": "Dagobah",
+      "nbrHabitant": "450000",
+      "allegeance": "Resistance",
+      "nbrKmTerre": 0,
+      "img": "dagobah.jpg"
     }
   ],
   "vaisseau": [
@@ -15,16 +24,32 @@
       "nom": "faucon millenium",
       "modele": "XXXXXXXXXX",
       "lightspeed": true,
-      "nbr passagers": 10,
+      "nbrPassagers": 10,
       "img": "test"
     },
     {
       "nom": "x-wing",
       "modele": "YYYY",
       "lightspeed": false,
-      "nbr passagers": 2,
+      "nbrPassagers": 2,
       "img": "image.jpg",
       "id": 2
+    },
+    {
+      "id": 3,
+      "nom": "Airspeeder",
+      "modele": "BBBBBBBBBBB",
+      "lightSpeed": null,
+      "nbrPassagers": "2",
+      "img": "airspeeder.png"
+    },
+    {
+      "id": 4,
+      "nom": "sfhsrhser",
+      "modele": "rhsrhserh",
+      "lightSpeed": null,
+      "nbrPassagers": "0325",
+      "img": "FDH"
     }
   ]
 }

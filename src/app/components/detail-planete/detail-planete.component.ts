@@ -14,8 +14,9 @@ planet: Planete;
   constructor(private route:ActivatedRoute, private planeteService:PlaneteService) { }
 
   ngOnInit(): void {
-    this.id=+(this.route.snapshot.paramMap.get('id'));
-    this.planet = this.planeteService.retourneUne(this.id)
+    this.planeteService.retourneUne(+this.route.snapshot.paramMap.get('id')).subscribe((data:Planete)=>{this.planet=data
+    });
+
   }
 
 }

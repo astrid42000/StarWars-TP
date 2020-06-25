@@ -11,12 +11,15 @@ import {ToastrService} from "ngx-toastr";
 })
 export class AddVaisseauComponent implements OnInit {
   newVaisseau= new Vaisseau();
+  isLoading:boolean;
   constructor(private vaisseauService: VaisseauService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
-  voir(): void{
-    this.vaisseauService.ajoutVaisseau(this.newVaisseau);
+  voir(){
+    this.isLoading=true;
+    this.vaisseauService.ajoutVaisseau(this.newVaisseau).subscribe(then=>{this.isLoading=false,
     this.router.navigate(['/vaisseaux']);
     this.toastr.success('vous avez bien ajouté votre vaisseau!', 'Succès !', {positionClass: 'toast-top-center'});
-}}
+});
+  }}

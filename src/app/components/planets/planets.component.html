@@ -1,6 +1,6 @@
 <h2>mes planetes</h2>
 
-
+<div *ngIf="!isLoading">
 <table class="table table-bordered table-dark w-75 mx-auto my-auto ">
   <thead>
   <th>Identifiant</th>
@@ -19,7 +19,7 @@
   <td>{{planete.nbrKmTerre}}</td>
     <td> <a [routerLink]="['/detail',planete.id]">Voir détails</a><br>
       <a [routerLink]="['/edit/update', planete.id]">mettre à jour</a><br>
-      <button (click)="deletePlanete(planete)">supprimer une planète</button>
+      <button (click)="deletePlanete(planete.id)">supprimer une planète</button>
     </td>
   </tr>
   </tbody>
@@ -27,7 +27,8 @@
 
 
   <button class="button"><a routerLink="/addPlanet/add">Ajouter une planète</a></button>
+</div>
+
+<div *ngIf="isLoading">Chargement en cours....</div>
 
 
-
-<div class="json">{{myPlanetes | json}}</div>
